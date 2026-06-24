@@ -2,25 +2,23 @@ name: Daily GPU Price Update
 
 on:
   schedule:
-      # Runs at 8:00 AM Pacific Time (15:00 UTC) on weekdays
-          # Change the time here if you want a different schedule
-              - cron: "0 15 * * 1-5"
-                workflow_dispatch: # Allows you to trigger it manually from GitHub UI
+    - cron: "0 15 * * 1-5"
+  workflow_dispatch:
 
-                jobs:
-                  post-gpu-prices:
-                      runs-on: ubuntu-latest
+jobs:
+  post-gpu-prices:
+    runs-on: ubuntu-latest
 
-                          steps:
-                                - name: Checkout repo
-                                        uses: actions/checkout@v4
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-                                              - name: Set up Python
-                                                      uses: actions/setup-python@v5
-                                                              with:
-                                                                        python-version: "3.12"
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-                                                                              - name: Post GPU prices to Slack
-                                                                                      env:
-                                                                                                SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-                                                                                                        run: python gpu_prices_to_slack.py
+      - name: Post GPU prices to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python gpu_prices_to_slack.py
