@@ -1,7 +1,7 @@
 name: Daily GPU Price Update
 on:
   schedule:
-    - cron: "0 15 * * 1-5"
+    - cron: "15 * * * *"
   workflow_dispatch:
 jobs:
   post-gpu-prices:
