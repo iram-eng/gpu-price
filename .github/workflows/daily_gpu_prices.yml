@@ -15,5 +15,5 @@ jobs:
           python-version: "3.12"
       - name: Post GPU prices to Slack
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
         run: python gpu_prices_to_slack.py
