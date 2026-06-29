@@ -1,7 +1,7 @@
 name: Daily GPU Price Update
 on:
   schedule:
-    - cron: "15 * * * *"
+    - cron: "0 15 * * *"
   workflow_dispatch:
 jobs:
   post-gpu-prices:
@@ -16,4 +16,5 @@ jobs:
       - name: Post GPU prices to Slack
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
+        run: python gpu_prices_to_slack.py
         run: python gpu_prices_to_slack.py
